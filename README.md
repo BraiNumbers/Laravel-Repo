@@ -1,3 +1,3 @@
 # Laravel-opdracht-1
 
-De repository met Laravel code
+Bryan's repository met Laravel code
