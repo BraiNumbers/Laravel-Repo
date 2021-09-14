@@ -1,16 +1,13 @@
-<!doctype html
-
-@include('partials.nav')
-
+<!DOCTYPE html>
 <title>Laravel</title>
 <link rel="stylesheet" href="/app.css">  
-
-<body>
-
 <article>
+    <h1>{{ $post->title }}</h1>
 
-<?= $post; ?>
-
+    <div>
+        {!! $post->body !!}
+    </div>
 </article>
 
-</body>
+<a href="/blogs">Go back</a>
+</html>

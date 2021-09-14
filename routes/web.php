@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,27 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/blogs', function () {
-    return view('blogs');
+Route::get('/create', function () {
+    return view('create')->with("posts",Post::all());
+})->name('create');
+
+Route::post('/create', function (Request $request) {
+    $post = new Post();
+    $post->title = $request->input('title');
+    $post->save();
+    return redirect('create')->with('succes', 'Post is geplaatst ' . $post->title);
+})->name('create');
+
+
+Route::get('blogs', function () {
+    return view('blogs' , [
+        'post' => Post::all()
+    ]);
 });
 
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-
-
-Route::get('/posts/{post}', function ($slug) {
-   $path = __DIR__ . "/../resources/posts/{$slug}.html";
-   
-   if (! file_exists($path)) {
-    return redirect('blogs');
-  }
-     $post = file_get_contents($path);
-
-   
-    return view('post', [
-        'post' => $post
-
-]);
-})->where('post', '[A-z_\-]+');
+Route::get('post/{post}', function (Post $post) {
+        return view('post' , [
+            'post' => $post
+        ]);
+    });
