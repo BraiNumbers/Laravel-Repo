@@ -24,19 +24,20 @@ Route::post('/create', function (Request $request) {
     $post = new Post();
     $post->title = $request->input('title');
     $post->save();
-    return redirect('create')->with('succes', 'Post is geplaatst ' . $post->title);
+
+    return redirect('create')->with('succes', 'Post is geplaatst: ' . $post->title);
 })->name('create');
 
 
-Route::get('blogs', function () {
-    return view('blogs' , [
+Route::get('index', function () {
+    return view('index' , [
         'post' => Post::all()
     ]);
 });
 
+Route::get('edit', function () {
+    return view('edit');
+});
 
-Route::get('post/{post}', function (Post $post) {
-        return view('post' , [
-            'post' => $post
-        ]);
-    });
+Route::resource('post', 'PostController');
+
