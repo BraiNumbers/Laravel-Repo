@@ -20,6 +20,10 @@ body{
     margin-left: 5px;
 }
 
+th {
+    width: 55px;
+}
+
 h1 {
     margin-left: 4px;
 } 
@@ -28,4 +32,9 @@ h1 {
     position: absolute;
     right: 15px;
     top: 46px;
+    padding-left:10px;
+}
+
+form {
+   margin: 5px;
 }

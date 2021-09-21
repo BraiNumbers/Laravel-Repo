@@ -17,7 +17,8 @@
       <th scope="col">Post title</th>
       <th scope="col">Description</th>
       <th scope="col">Created at</th>
-      <th scope="col">Published at</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   @foreach ($post as $post)
@@ -27,7 +28,8 @@
       <td>{{ $post->title }}</td>
       <td>{{ $post->excerpt }}</td>
       <td>{{ $post->created_at }}</td>
-      <td>{{ $post->published_at }}</td>
+      <td>Edit</td>
+      <td><a href="{{ route('post.destroy', ['id' => $post->id]) }}">Delete</a></td> 
     </tr>
     @endforeach
   </tbody>

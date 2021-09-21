@@ -25,7 +25,7 @@ Route::post('/create', function (Request $request) {
     $post->title = $request->input('title');
     $post->save();
 
-    return redirect('create')->with('succes', 'Post is geplaatst: ' . $post->title);
+    return redirect('create');
 })->name('create');
 
 
@@ -39,5 +39,6 @@ Route::get('edit', function () {
     return view('edit');
 });
 
-Route::resource('post', 'PostController');
+Route::get('App/{id}', 'PostController@destroy')
+     ->name('post.destroy');
 
