@@ -30,11 +30,18 @@ h1 {
 
 .btn {
     position: absolute;
-    right: 15px;
-    top: 46px;
+    left: 499px;
+    top: 50px;
     padding-left:10px;
+}
+
+.btn1 {
+    background: white;
+    left: 5px;
+    top: 230px;
 }
 
 form {
    margin: 5px;
+   width: 50%;
 }

@@ -16,29 +16,21 @@ use App\Post;
 |
 */
 
-Route::get('/create', function () {
-    return view('create')->with("posts",Post::all());
-})->name('create');
+Route::get('posts/create', function () {
+    return view('posts/create');
+})->name('post.create');
 
-Route::post('/create', function (Request $request) {
-    $post = new Post();
-    $post->title = $request->input('title');
-    $post->save();
+Route::get('create', 'PostController@store')->name('post.store');
 
-    return redirect('create');
-})->name('create');
-
-
-Route::get('index', function () {
-    return view('index' , [
+Route::get('posts/index', function () {
+    return view('posts/index' , [
         'post' => Post::all()
     ]);
 });
 
-Route::get('edit', function () {
-    return view('edit');
-});
+Route::get('posts/edit/{id}', 'PostController@edit')->name('post.edit');
 
-Route::get('App/{id}', 'PostController@destroy')
-     ->name('post.destroy');
+Route::post('update/{id}', 'PostController@update')->name('post.update');
+
+Route::get('delete/{id}', 'PostController@destroy')->name('post.destroy');
 

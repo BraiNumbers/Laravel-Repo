@@ -12,9 +12,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+        public function index()
     {
-        //
+        
+        return view('posts/index' , [
+            'post' => Post::all()
+        ]);
     }
 
     /**
@@ -22,7 +25,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+        public function create()
     {
         //
     }
@@ -33,9 +36,14 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->excerpt = $request->input('excerpt');
+        $post->save();
+        return redirect('posts/index');
+
     }
 
     /**
@@ -55,9 +63,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit')->with('post', $post);
+
     }
 
     /**
@@ -67,9 +77,19 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+     
+    $this->validate($request, [
+        'title' => 'required',
+        'excerpt' => 'required'
+    ]);
+
+    $post = Post::find($id);
+    $post->title = $request->input('title');
+    $post->excerpt = $request->input('excerpt');
+    $post->save();
+    return redirect('posts/index');
     }
 
     /**
