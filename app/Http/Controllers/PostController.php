@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -27,7 +28,7 @@ class PostController extends Controller
      */
         public function create()
     {
-        //
+        return view('posts/create');
     }
 
     /**
@@ -37,12 +38,19 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
         public function store(Request $request)
+        
     {
+        $this->validate($request, [
+            'title' => 'required|unique:posts|min:3',
+            'excerpt' => 'required|min:5|max:255'
+        ]);
+       
         $post = new Post();
         $post->title = $request->input('title');
         $post->excerpt = $request->input('excerpt');
         $post->save();
-        return redirect('posts/index');
+        return redirect('posts/index')->with('message', 'The post is saved successfully!');
+        
 
     }
 
@@ -65,7 +73,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findorfail($id);
         return view('posts.edit')->with('post', $post);
 
     }
@@ -81,12 +89,13 @@ class PostController extends Controller
     {
      
     $this->validate($request, [
-        'title' => 'required',
-        'excerpt' => 'required'
+        'title' => 'required|min:3',
+        'excerpt' => 'required|min:5|max:255'
     ]);
 
-    $post = Post::find($id);
+    $post = Post::findorfail($id);
     $post->title = $request->input('title');
+    Rule::unique('posts')->ignore('title');
     $post->excerpt = $request->input('excerpt');
     $post->save();
     return redirect('posts/index');
@@ -100,8 +109,9 @@ class PostController extends Controller
      */
     public function destroy($post)
     {
-        $post = Post::find($post);
+        $post = Post::findorfail($post);
         $post->delete();
         return redirect()->back();
     }
+    
 }

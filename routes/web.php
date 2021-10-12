@@ -15,22 +15,16 @@ use App\Post;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get ('/', function () {
+    return view('welcome');});
 
-Route::get('posts/create', function () {
-    return view('posts/create');
-})->name('post.create');
-
+Route::get('posts/create', 'PostController@create')->name('post.create');
 Route::get('create', 'PostController@store')->name('post.store');
-
-Route::get('posts/index', function () {
-    return view('posts/index' , [
-        'post' => Post::all()
-    ]);
-});
-
+Route::get('posts/index', 'PostController@index')->name('post.index');
 Route::get('posts/edit/{id}', 'PostController@edit')->name('post.edit');
-
 Route::post('update/{id}', 'PostController@update')->name('post.update');
-
 Route::get('delete/{id}', 'PostController@destroy')->name('post.destroy');
 
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
