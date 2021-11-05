@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -13,11 +12,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-        public function index()
+    public function index()
     {
         
-        return view('posts/index' , [
-            'post' => Post::all()
+        return view('posts/posts' , [
+            'posts' => Post::orderBy('updated_at', 'DESC')->get()
         ]);
     }
 
@@ -26,7 +25,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-        public function create()
+    public function create()
     {
         return view('posts/create');
     }
@@ -37,21 +36,22 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-        public function store(Request $request)
-        
+    public function store(Request $request) 
     {
         $this->validate($request, [
-            'title' => 'required|unique:posts|min:3',
-            'excerpt' => 'required|min:5|max:255'
+            'title' => 'required|unique:posts|min:3|max:255',
+            'intro' => 'required|min:3|max:45',
+            'description' => 'required'
         ]);
-       
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->excerpt = $request->input('excerpt');
-        $post->save();
-        return redirect('posts/index')->with('message', 'The post is saved successfully!');
-        
 
+        Post::create([
+            'title' => $request->title,
+            'intro' => $request->intro,
+            'description' => $request->description,
+            'owner_id' => auth()->id()
+        ]);
+        
+        return redirect('/posts')->with(['message' => 'The post has been created', 'alert' => 'alert-success']);
     }
 
     /**
@@ -61,8 +61,16 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
+    {       
+        return view('posts/my-post' , [
+            'post' => Post::orderBy('created_at', 'DESC')->get()
+        ]);
+    }
+
+    public function showcard($id)
     {
-        //
+        $post = Post::findorfail($id);
+        return view('/posts/show')->with('post', $post);
     }
 
     /**
@@ -74,8 +82,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findorfail($id);
+        $this->authorize('update', $post);
         return view('posts.edit')->with('post', $post);
-
     }
 
     /**
@@ -87,18 +95,23 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-     
-    $this->validate($request, [
-        'title' => 'required|min:3',
-        'excerpt' => 'required|min:5|max:255'
-    ]);
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'intro' => 'required|min:3|max:45',
+            'description' => 'required'
+        ]);
 
-    $post = Post::findorfail($id);
-    $post->title = $request->input('title');
-    Rule::unique('posts')->ignore('title');
-    $post->excerpt = $request->input('excerpt');
-    $post->save();
-    return redirect('posts/index');
+        $post = Post::findorfail($id);
+
+        $this->authorize('update', $post);
+
+        $post->title = $request->title;
+        $post->intro = $request->intro;
+        $post->description = $request->description;
+
+        $post->save();
+
+        return redirect('/posts')->with(['message' => 'The post has been updated', 'alert' => 'alert-success']);
     }
 
     /**
@@ -110,8 +123,12 @@ class PostController extends Controller
     public function destroy($post)
     {
         $post = Post::findorfail($post);
+
+        $this->authorize('delete', $post);
+        
         $post->delete();
-        return redirect()->back();
+        
+        return back()->with(['message' => 'The post has been deleted', 'alert' => 'alert-success']);
     }
     
 }
