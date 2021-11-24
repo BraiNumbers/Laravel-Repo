@@ -61,10 +61,12 @@
 
             @if (Route::has('login') && Auth::check())
                 <div class="top-right links">
-                  <a href="{{ url('/posts') }}">Posts</a>
+                    <a href="{{ url('/projects') }}">Projects</a>
+                    <a href="{{ url('/posts') }}">Posts</a>
                 </div>
             @elseif (Route::has('login') && !Auth::check())
                 <div class="top-right links">
+                    <a href="{{ url('/projects') }}">Projects</a>
                     <a href="{{ url('/posts') }}">Posts</a>
                     <a href="{{ url('/login') }}">Login</a>
                     <a href="{{ url('/register') }}">Register</a>

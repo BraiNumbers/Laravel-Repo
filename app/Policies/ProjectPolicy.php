@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Post;
+use App\Project;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class ProjectPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class PostPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Project  $project
      * @return mixed
      */
-    public function view(User $user, Post $post)
+    public function view(User $user, Project $project)
     {
-        return $post->owner_id == $user->id;
+        return $project->owner_id == $user->id;
     }
 
     /**
@@ -41,41 +41,41 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+       //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Project  $project
      * @return mixed
      */
-    public function update(User $user, Post $post)
+    public function update(User $user, Project $project)
     {
-        return $post->owner_id == $user->id;
+        return $project->project_id == $user->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Project  $project
      * @return mixed
      */
-    public function delete(User $user, Post $post)
+    public function delete(User $user, Project $project)
     {
-        return $post->owner_id == $user->id;
+        return $project->owner_id == $user->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Project  $project
      * @return mixed
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user, Project $project)
     {
         //
     }
@@ -84,13 +84,16 @@ class PostPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Post  $post
+     * @param  \App\Project  $project
      * @return mixed
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user, Project $project)
     {
         //
     }
-    
 
+    public function attach(User $user, Project $project)
+    {
+        return $project->owner_id == $user->id;
+    }
 }

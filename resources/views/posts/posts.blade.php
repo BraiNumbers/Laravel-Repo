@@ -12,7 +12,7 @@
           </div>
         </div> 
       </div>
-    @endauth
+     @endauth
 
     @if(session()->has('message'))
       <div style="position: absolute; padding: 5px; width: 290px;">

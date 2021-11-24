@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -36,14 +38,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(StorePostRequest $request) 
     {
-        $this->validate($request, [
-            'title' => 'required|unique:posts|min:3|max:255',
-            'intro' => 'required|min:3|max:45',
-            'description' => 'required'
-        ]);
-
         Post::create([
             'title' => $request->title,
             'intro' => $request->intro,
@@ -70,6 +66,7 @@ class PostController extends Controller
     public function showcard($id)
     {
         $post = Post::findorfail($id);
+        
         return view('/posts/show')->with('post', $post);
     }
 
@@ -82,7 +79,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findorfail($id);
+
         $this->authorize('update', $post);
+
         return view('posts.edit')->with('post', $post);
     }
 
@@ -93,14 +92,8 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'intro' => 'required|min:3|max:45',
-            'description' => 'required'
-        ]);
-
         $post = Post::findorfail($id);
 
         $this->authorize('update', $post);
@@ -130,5 +123,5 @@ class PostController extends Controller
         
         return back()->with(['message' => 'The post has been deleted', 'alert' => 'alert-success']);
     }
-    
+        
 }

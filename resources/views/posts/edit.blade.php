@@ -23,27 +23,25 @@
                 <div class="form-group row">
                   <label for="validationTitle" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="title" placeholder="Enter the title here" name="title" rows="1" value="{{ $post->title }}" required> 
+                      <input type="text" class="form-control" id="title" placeholder="Enter the title here" name="title" rows="1" value="{{ old('title', $post->title) }}" required> 
                       @error('title') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror  
                    </div>
                  </div>
-                 
-                <div class="form-group row">
+                  <div class="form-group row">
                    <label for="validationIntro" class="col-sm-2 col-form-label">Intro</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="description" placeholder="Enter the intro here" name="intro" rows="2" required>{{ $post->intro }}</textarea>
+                      <textarea class="form-control" id="description" placeholder="Enter the intro here" name="intro" rows="2" required>{{ old('intro', $post->intro) }}</textarea>
                       @error('intro') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror    
                     </div>
                  </div>
-
                <div class="form-group row">
                  <label for="validationDescription" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                      <textarea class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ $post->description }}</textarea>
+                      <textarea class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ old('description', $post->description) }}</textarea>
                       @error('description') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror    

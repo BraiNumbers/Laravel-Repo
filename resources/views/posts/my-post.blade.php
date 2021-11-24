@@ -22,7 +22,6 @@
               <thead>
                 <tr>
                   <th scope="col">Post title</th>
-                  <th scope="col">Author</th>
                   <th scope="col"></th>
                   <th scope="col"></th>
                 </tr>
@@ -31,21 +30,20 @@
               <tbody>
                 <tr class="table table-bordered">
                   <td><a href="{{ route('post.showcard', $post->id) }}" class="btn text">{{ $post->title }}</a></td>
-                  <td><a href="/profile" class="btn text">{{ Auth::user()->name }}</th>
-                  <td><a href="{{ route('post.edit', $post->id) }}" class="btn text-primary">Update</a></td>
+                  <td><a href="{{ route('post.edit', $post->id) }}" class="btn text-primary">Edit</a></td>
                   <td>
                     <form action="{{ route('post.destroy', ['id' => $post->id]) }}" method="post">
                       @method('DELETE')
                       @csrf
                       <button class="btn text-danger">Delete</button>
-                    </form>  
-                  </tr>
-              @endforeach
+                    </form> 
+                   </td> 
+                 </tr>
             </tbody>
-        </table>
-      </div>
-    </div>
-
+           @endforeach
+       </table>
+   </div>
+      
     @if(session()->has('message'))
       <div style="position: absolute; padding: 5px; width: 290px;">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,5 +52,7 @@
         </div>
       </div>
     @endif
+    
+  </div>
 
 @endsection

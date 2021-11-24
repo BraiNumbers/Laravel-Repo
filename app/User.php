@@ -45,6 +45,8 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class, 'owner_id');
     }
-    
-
+  
+    public function projects()  {
+        return $this->belongsToMany(Project::class);
+    }
 }

@@ -14,14 +14,14 @@
       </div>
     @endauth
 
-  @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 320px;">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('message') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    @if(session()->has('message'))
+      <div style="position: absolute; padding: 5px; width: 320px;">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ session('message') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     </div>
-  </div>
-  @endif
+    @endif
 
    <div class="col-md-9">
     <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -39,7 +39,7 @@
        
     <div class="card-body">
       <a href="{{ route('profile.edit', $user) }}" class="btn float-right btn-info">Edit profile</a>
-      <h4 class="card-title">User details:</h4>
+      <h5 class="card-title">User details:</h5>
       <p class="card-title">Name: {{ Auth::user()->name }} </p>
       <p class="card-title">Email: {{ Auth::user()->email }}</p>
     </div>
