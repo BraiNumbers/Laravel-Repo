@@ -41,10 +41,9 @@
           @endforeach
        </tbody>
       </table>
-     <a href="{{ route('projects.show', $project->id) }}" class="col-md-2">Back</a> 
+     <a href="{{ route('projects.edit', $project->id) }}" class="float-end">Back</a> 
    </div>
    
-
    @if(session()->has('message'))
     <div style="position: absolute; padding: 5px; width: 390px;">
       <div class="alert alert-success alert-dismissible fade show" role="alert">

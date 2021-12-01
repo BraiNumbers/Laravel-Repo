@@ -46,6 +46,7 @@ Route::get('projects/create', 'ProjectController@create')->name('projects.create
 Route::post('projects/store', 'ProjectController@store')->name('projects.store')->middleware('auth');
 Route::get('projects/edit/{id}', 'ProjectController@edit')->name('projects.edit')->middleware('auth');
 Route::put('projects/update/{id}', 'ProjectController@update')->name('projects.update')->middleware('auth');
+Route::post('/projects/{project}/assign/{user}', 'ProjectController@assign')->name('projects.assign')->middleware('auth');
 Route::delete('projects/{project}/detach/{user}', 'ProjectController@detach')->name('projects.detach')->middleware('auth');
 Route::delete('projects/delete/{id}', 'ProjectController@destroy')->name('projects.destroy')->middleware('auth');
 
@@ -56,7 +57,7 @@ Route::put('profile/update/{user}', 'UserController@update')->name('profile.upda
 Route::get('user/posts', 'UserController@posts')->name('user.posts')->middleware('auth');
 Route::get('user/projects', 'UserController@projects')->name('user.projects')->middleware('auth');
 Route::get('/projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');
-Route::post('/projects/{project}/assign/{user}', 'ProjectController@assign')->name('projects.assign')->middleware('auth');
+
 
 
 

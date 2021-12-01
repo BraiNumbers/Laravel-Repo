@@ -29,7 +29,7 @@
           Posts
         </h1>
         @auth
-          <a class="btn btn-info" href="/posts/create" role="button">Create post</a>
+          <a class="btn btn-primary" href="/posts/create" role="button">Create post</a>
         @endauth
      </div>
     
@@ -37,11 +37,11 @@
   <div class="row justify-content-between">
       @foreach ($posts as $post)
         <div class="card mb-3 p-0" style="width: 15rem;">
-          <img class="card-img-top" src="https://www.lyon-ortho-clinic.com/files/cto_layout/img/placeholder/camera.jpg" alt="Card image missing">
+          <img class="card-img-top" src="https://www.slashgear.com/wp-content/uploads/2015/10/default-placeholder-1024x1024-960x540.jpg">
           <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->intro }}</p>
-            <a href="{{ route('post.showcard', $post->id) }}" class="btn btn-info">Read more</a>
+            <a href="{{ route('post.showcard', $post->id) }}" class="btn btn-secondary">Read more</a>
           </div>
          </div> 
         @endforeach 

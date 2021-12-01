@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 @section('content')
 
 <div class="d-flex justify-content-between">
@@ -13,11 +15,37 @@
         </div>
       </div>
     </div>
-  
-  <div class="card col-md-9 mx-auto">
+
+    @if(session()->has('message'))
+    <div style="position: absolute; padding: 5px; width: 290px;">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+   @endif
+
+    <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          Update project
+        </h1>
+     </div>
+
+    <div class="card col-md-12 mx-auto">
         <div class="card-body">
-          <h1 class="card-title">Update project</h1>
-            <form action="{{route('projects.update', $project)}}" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Edit</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Users</button>
+          </li>
+         </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+         <br>
+          <form action="{{route('projects.update', $project)}}" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
               @method("PUT")    
               @csrf
                 <div class="form-group row">
@@ -32,7 +60,7 @@
                   <div class="form-group row">
                    <label class="col-sm-2 col-form-label">Intro</label>
                     <div class="col-sm-10">
-                      <textarea id="editor1" class="form-control" name="intro" rows="2" required>{{ old('intro', $project->intro) }}</textarea>
+                      <textarea class="form-control" name="intro" rows="2" required>{{ old('intro', $project->intro) }}</textarea>
                       @error('intro') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror    
@@ -41,7 +69,7 @@
                <div class="form-group row">
                  <label class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                      <textarea id="editor2" class="form-control" name="description" rows="2" required>{{ old('description', $project->description) }}</textarea>
+                      <textarea id="editor" class="form-control" name="description" rows="2" required>{{ old('description', $project->description) }}</textarea>
                       @error('description') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror    
@@ -51,7 +79,7 @@
                   <label class="col-sm-2 col-form-label">Project image</label>
                     <div class="col-sm-10">
                       <input type="file" class="form-control" name="project_image">
-                      <img src="{{ asset($project->project_image) }}" width="100px">
+                      <img src="{{ asset($project->project_image) }}" width="88px">
                         @error('project_image') 
                         <small class='text-danger'>{{$message}}</small>
                         @enderror  
@@ -75,34 +103,56 @@
                         @enderror   
                     </div>
                  </div>
-              <a href="{{ route('projects.index') }}" class="col-md-2 float-md-start">Cancel</a>
-              <button type="submit" class="btn btn-info col-md-3 float-md-end">Update project</button>
-           </form>       
+                 <button type="submit" class="btn btn-primary float-md-end">Update project</button>
+               <a href="{{ route('projects.index') }}" class="mr-2 float-md-end">Cancel</a>
+             </form>       
+            </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <br>
+          @if ($project->author_id == Auth::id())
+            <a class="btn btn-primary float-md-end" href="{{ route('user.add' , $project) }}" role="button">Add user</a>
+            <tbody>
+          @endif
+          <table class="table table-bordered">
+           <thead>
+              <tr>
+                <th scope="col">Project members</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+              @foreach($project->users as $user)
+              <tr class="table table-bordered">
+                <td><a>{{ $user->name }}</a></td>
+                <td><a>Insert role here</a></td>
+                <td>
+                @if(auth()->user()->id == $project->author_id)
+                <form action="{{route('projects.detach', ['project'=>$project, 'user'=>$user]) }}" method="post" onclick="return confirm('Are you sure?')">
+                @method('DELETE')
+                @csrf
+                <button class="btn text-danger">Delete</button>
+                </form>
+                @endif
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+          </div>
         </div>
       </div>  
     </div>     
    
     <script>
-          ClassicEditor
-            .create( document.querySelector( '#editor1' ) )
-            .then( editor => {
-                    console.log( editor );
-            } )
-            .catch( error => {
-                    console.error( error );
-            } );
+      ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+                console.log( editor );
+        } )
+        .catch( error => {
+                console.error( error );
+        } );
     </script>
 
-    <script>
-          ClassicEditor
-            .create( document.querySelector( '#editor2' ) )
-            .then( editor => {
-                    console.log( editor );
-            } )
-            .catch( error => {
-                    console.error( error );
-            } );
-    </script>
- 
- </div>
+</div>
 @endsection

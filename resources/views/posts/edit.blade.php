@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 @section('content')
  
   <div class="d-flex justify-content-between">
@@ -41,17 +43,30 @@
                <div class="form-group row">
                  <label for="validationDescription" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                      <textarea class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ old('description', $post->description) }}</textarea>
+                      <textarea id="editor" class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ old('description', $post->description) }}</textarea>
                       @error('description') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror    
                   </div>
                 </div>
-              <a href="{{ route('user.posts', Auth::id()) }}" class="col-md-2 float-md-start">Cancel</a>
-              <button type="submit" class="btn btn-info col-md-2 float-md-end">Update post</button>
+                <button type="submit" class="btn btn-primary float-md-end">Update post</button>
+              <a href="{{ route('user.posts', Auth::id()) }}" class="mr-2 float-md-end">Cancel</a>
+             
            </form>       
         </div>
       </div>  
     </div>     
   </div>
+
+  <script>
+      ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+                console.log( editor );
+        } )
+        .catch( error => {
+                console.error( error );
+        } );
+    </script>
+    
 @endsection

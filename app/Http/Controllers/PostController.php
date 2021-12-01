@@ -44,7 +44,7 @@ class PostController extends Controller
             'title' => $request->title,
             'intro' => $request->intro,
             'description' => $request->description,
-            'owner_id' => auth()->id()
+            'author_id' => auth()->id()
         ]);
         
         return redirect('/posts')->with(['message' => 'The post has been created', 'alert' => 'alert-success']);

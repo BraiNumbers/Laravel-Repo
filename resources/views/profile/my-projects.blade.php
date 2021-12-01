@@ -16,39 +16,43 @@
   </div>
   @endauth
 
-   <div class="card col-9 mx-auto">
-     <div class="card-body">
-      <a class="btn btn-info col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
-          <h1 class="card-title">My projects</h1> 
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Project name</th>
-                  <th scope="col">Project Leader</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              @foreach ($projects as $project)
-               <tbody>
-                <tr class="table table-bordered">
-                  <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
-                  <td><a>{{ $project->owner['name'] }}</a></td>
-                  <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
-                  <td>
-                  @if(auth()->user()->id == $project->owner_id)
-                   <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn text-danger">Delete</button>
-                   </form>
-                   @endif
-                  </td>
-                 </tr>
-               </tbody>
-            @endforeach
-         </table>
-      </div>
+      <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          My projects
+        </h1>
+        <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
+      </div>  
+  
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Leader</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          @foreach ($projects as $project)
+            <tbody>
+            <tr class="table table-bordered">
+              <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
+              <td><a>{{ $project->author->name }}</a></td>
+              <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
+              <td>
+              @if(auth()->user()->id == $project->author_id)
+                <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">
+                @method('DELETE')
+                @csrf
+                <button class="btn text-danger">Delete</button>
+                </form>
+                @endif
+              </td>
+              </tr>
+            </tbody>
+        @endforeach
+      </table>
+  </div>
 
    @if(session()->has('message'))
     <div style="position: absolute; padding: 5px; width: 290px;">

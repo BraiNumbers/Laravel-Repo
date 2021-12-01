@@ -30,7 +30,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        return $project->owner_id == $user->id;
+        return $project->author_id == $user->id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
-        return $project->owner_id == $user->id;
+        return $project->author_id == $user->id;
     }
 
     /**
@@ -94,6 +94,6 @@ class ProjectPolicy
 
     public function attach(User $user, Project $project)
     {
-        return $project->owner_id == $user->id;
+        return $project->author_id == $user->id;
     }
 }

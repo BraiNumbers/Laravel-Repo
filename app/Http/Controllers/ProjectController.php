@@ -49,7 +49,7 @@ class ProjectController extends Controller
             'project_image' => $request->project_image->store('images/projects'),
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'owner_id' => auth()->id()
+            'author_id' => auth()->id()
         ]);
 
         $project->users()->attach(auth()->id());
@@ -125,6 +125,8 @@ class ProjectController extends Controller
         $project = Project::findorfail($project);
 
         $this->authorize('delete', $project);
+
+        Storage::delete($project->project_image);
 
         $project->delete();
 

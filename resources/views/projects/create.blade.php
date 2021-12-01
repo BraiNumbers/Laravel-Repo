@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 @section('content')
 
  <div class="d-flex justify-content-between">
@@ -32,7 +34,7 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Intro</label>
                 <div class="col-sm-10">
-                <textarea id="editor1" class="form-control" name="intro" rows="2" required>{{ old('intro') }}</textarea>
+                <textarea class="form-control" name="intro" rows="2" required>{{ old('intro') }}</textarea>
                   @error('intro') 
                   <small class='text-danger'>{{$message}}</small>
                   @enderror   
@@ -41,14 +43,14 @@
               <div class="form-group row">
               <label class="col-sm-2 col-form-label">Description</label>
                 <div class="col-sm-10">
-                  <textarea id="editor2" class="form-control" name="description" rows="2" required>{{ old('description') }}</textarea>
+                  <textarea id="editor" class="form-control" name="description" required>{{ old('description') }}</textarea>
                     @error('description') 
                       <small class='text-danger'>{{$message}}</small>
                     @enderror  
                 </div>
               </div>
               <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Project image</label>
+               <label class="col-sm-2 col-form-label">Project image</label>
                 <div class="col-sm-10">
                   <input type="file" class="form-control" name="project_image">
                     @error('project_image') 
@@ -74,15 +76,15 @@
                       @enderror   
                   </div>
                 </div>
-              <a href="/projects" class="col-md-2 float-md-start">Cancel</a>
-            <button type="submit" class="btn btn-info float-md-end">Submit project</button>
-         </form>       
-       </div>
-     </div> 
+                <button type="submit" class="btn btn-primary float-md-end">Submit project</button>
+              <a href="/projects" class="mr-2 float-md-end">Cancel</a>
+           </form>       
+        </div>
+      </div> 
 
         <script>
           ClassicEditor
-            .create( document.querySelector( '#editor1' ) )
+            .create( document.querySelector( '#editor' ) )
             .then( editor => {
                     console.log( editor );
             } )
@@ -92,15 +94,11 @@
         </script>
 
         <script>
-          ClassicEditor
-            .create( document.querySelector( '#editor2' ) )
-            .then( editor => {
-                    console.log( editor );
-            } )
-            .catch( error => {
-                    console.error( error );
-            } );
-        </script>
+          $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+         });
+         </script>
 
-  </div>
+
+   </div>
 @endsection

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 @section('content')
   <div class="row">
     <div class="col-md-2">
@@ -37,18 +39,30 @@
               <div class="form-group row">
                   <label for="validationDescription" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                  <textarea class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ old('description') }}</textarea>
+                  <textarea id="editor" class="form-control" id="description" placeholder="Enter the description here" name="description" rows="2" required>{{ old('description') }}</textarea>
                   @error('description') 
                   <small class='text-danger'>{{$message}}</small>
                   @enderror  
               </div>
               </div>
-              <a href="/posts" class="col-md-2 float-md-start">Cancel</a>
-              <button type="submit" class="btn btn-info col-md-2 float-md-end">Submit post</button>
-          </form>       
-      </div>
-  </div>  
-</div>    
+              <button type="submit" class="btn btn-primary float-md-end">Submit post</button>
+              <a href="/posts" class="mr-2 float-md-end">Cancel</a>
+            </form>       
+          </div>
+      </div>  
+    </div>    
+
+      <script>
+          ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+      </script>
+
 @endsection
 
 
