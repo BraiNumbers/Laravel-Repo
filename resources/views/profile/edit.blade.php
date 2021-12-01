@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
-
 @section('content')
 
   <div class="d-flex justify-content-between">  
@@ -52,7 +50,7 @@
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">City</label>
                 <div class="col-sm-10">
-                <select class="js-example-basic-single" name="city">
+                <select class="js-example-basic-single" style="width: 100%" name="city">
                   <option value="Groningen">Groningen</option>
                   <option value="Nunspeet">Nunspeet</option>
                   <option value="Hoogeveen">Hoogeveen</option>
@@ -76,10 +74,10 @@
           <script>
             $(document).ready(function() {
               $('.js-example-basic-single').select2();
-            });
+            });             
           </script>
 
-@endsection
+  @endsection
 
 
 
