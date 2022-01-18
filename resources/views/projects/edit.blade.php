@@ -103,46 +103,40 @@
                         @enderror   
                     </div>
                  </div>
-                 <button type="submit" class="btn btn-primary float-md-end">Update project</button>
-               <a href="{{ route('projects.index') }}" class="mr-2 float-md-end">Cancel</a>
+                 <button type="submit" class="btn btn-primary float-md-end">Update</button>
+               <a href="{{ route('projects.index') }}" class="btn btn-link float-md-end mr-1">Cancel</a>
              </form>       
             </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <br>
-          @if ($project->author_id == Auth::id())
-            <a class="btn btn-primary float-md-end" href="{{ route('user.add' , $project) }}" role="button">Add user</a>
+            <a class="btn btn-primary float-md-end mr-1" href="{{ route('user.add' , $project) }}" role="button">Add user</a>
             <tbody>
-          @endif
-          <table class="table table-bordered">
+           <table class="table table-bordered">
            <thead>
               <tr>
                 <th scope="col">Project members</th>
-                <th scope="col">Role</th>
-                <th scope="col"></th>
-                </tr>
+                <th colspan="3" scope="col">Role</th>
+              </tr>
             </thead>
               @foreach($project->users as $user)
               <tr class="table table-bordered">
                 <td><a>{{ $user->name }}</a></td>
-                <td><a>Insert role here</a></td>
-                <td>
-                @if(auth()->user()->id == $project->author_id)
-                <form action="{{route('projects.detach', ['project'=>$project, 'user'=>$user]) }}" method="post" onclick="return confirm('Are you sure?')">
-                @method('DELETE')
-                @csrf
-                <button class="btn text-danger">Delete</button>
-                </form>
-                @endif
+                <td><a>{{ $user->pivot->role }}</a></td>
+                 <td>
+                  <form action="{{route('projects.detach', ['project'=>$project, 'user'=>$user]) }}" method="post" onclick="return confirm('Are you sure you want to delete this user?')">
+                      @method('DELETE')
+                      @csrf
+                      <button class="btn text-danger">Delete</button>
+                  </form>
                 </td>
               </tr>
               @endforeach
             </tbody>
           </table>
-          </div>
-        </div>
-      </div>  
-    </div>     
-   
+         </div>
+        </div>  
+      </div> 
+           
     <script>
       ClassicEditor
         .create( document.querySelector( '#editor' ) )

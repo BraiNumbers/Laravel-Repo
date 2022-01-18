@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeOwnerIdToAuthorIdInProjects extends Migration
+class AddRoleIdToProjectUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeOwnerIdToAuthorIdInProjects extends Migration
      */
     public function up()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->renameColumn('owner_id', 'author_id');
+        Schema::table('project_user', function (Blueprint $table) {
+            $table->string('role')->after('user_id')->default('Leader');
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeOwnerIdToAuthorIdInProjects extends Migration
      */
     public function down()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->renameColumn('author_id', 'owner_id');
+        Schema::table('project_user', function (Blueprint $table) {
+            Schema::dropcolumn('role');
         });
     }
 }

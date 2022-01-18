@@ -32,30 +32,26 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" name="name" rows="1" value="{{ Auth::user()->name }}" required> 
+                <input type="text" class="form-control" id="name" name="name" rows="1" value="{{ old('name', $user->name) }}" required> 
                 @error('name') 
                 <small class='text-danger'>{{$message}}</small>
                 @enderror   
               </div>
-            </div>
+             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" name="email" rows="2" value="{{ Auth::user()->email }}" required>
-                @error('email') 
-                <small class='text-danger'>{{$message}}</small>
-                @enderror 
+                <input type="text" class="form-control" id="email" name="email" rows="1" value="{{ old('email', $user->email) }}" required> 
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">City</label>
                 <div class="col-sm-10">
-                <select class="js-example-basic-single" style="width: 100%" name="city">
-                  <option value="Groningen">Groningen</option>
-                  <option value="Nunspeet">Nunspeet</option>
-                  <option value="Hoogeveen">Hoogeveen</option>
-                </select>
-               </div>
+                <input type="text" class="form-control" id="city" name="city" rows="1" value="{{ old('city', $user->city) }}" required>
+                @error('city') 
+                 <small class='text-danger'>{{$message}}</small>
+                @enderror  
+              </div>
               </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Profile image</label>
@@ -67,16 +63,10 @@
                     @enderror  
                 </div>
               </div>
-             <button type="submit" class="btn btn-primary float-md-end">Update profile</button>
-            <a href="/profile" class="mr-2 float-md-end">Cancel</a>
+             <button type="submit" class="btn btn-primary float-md-end">Update</button>
+            <a href="/profile" class="btn btn-link float-md-end mr-1">Cancel</a>
           </form>         
   
-          <script>
-            $(document).ready(function() {
-              $('.js-example-basic-single').select2();
-            });             
-          </script>
-
   @endsection
 
 

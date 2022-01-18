@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Project;
+use App\Task;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,17 +24,17 @@ use App\Project;
 Route::get ('/', function () {
     return view('welcome');});
 
-Route::get ('/posts/posts', function () {
-    return view('/posts/posts');});  
-
 Route::get ('/posts/create', function () {
     return view('/posts/create');}); 
+
+ Route::get ('/projects/create', function () {
+    return view('/projects/create');}); 
 
 Auth::routes();
 
 // PostController related routes
 Route::get('posts', 'PostController@index')->name('post.index');
-Route::get('posts/{id}', 'PostController@showcard')->name('post.showcard');
+Route::get('posts/show/{id}', 'PostController@showcard')->name('post.showcard');
 Route::get('posts/create', 'PostController@create')->name('post.create')->middleware('auth');
 Route::post('posts/store', 'PostController@store')->name('post.store')->middleware('auth');
 Route::get('post/edit/{id}', 'PostController@edit')->name('post.edit')->middleware('auth');
@@ -41,22 +43,30 @@ Route::delete('posts/delete/{id}', 'PostController@destroy')->name('post.destroy
 
 // ProjectController related routes
 Route::get('projects', 'ProjectController@index')->name('projects.index');
-Route::get('projects/show/{id}', 'ProjectController@show')->name('projects.show');
+Route::get('projects/show/{project}', 'ProjectController@show')->name('projects.show');
 Route::get('projects/create', 'ProjectController@create')->name('projects.create')->middleware('auth');
 Route::post('projects/store', 'ProjectController@store')->name('projects.store')->middleware('auth');
 Route::get('projects/edit/{id}', 'ProjectController@edit')->name('projects.edit')->middleware('auth');
 Route::put('projects/update/{id}', 'ProjectController@update')->name('projects.update')->middleware('auth');
-Route::post('/projects/{project}/assign/{user}', 'ProjectController@assign')->name('projects.assign')->middleware('auth');
+Route::post('projects/{project}/assign', 'ProjectController@assign')->name('projects.assign')->middleware('auth');
 Route::delete('projects/{project}/detach/{user}', 'ProjectController@detach')->name('projects.detach')->middleware('auth');
 Route::delete('projects/delete/{id}', 'ProjectController@destroy')->name('projects.destroy')->middleware('auth');
 
+// Task related routes
+Route::get('projects/{project}/task/create', 'ProjectController@task')->name('projects.task')->middleware('auth');
+Route::post('projects/{project}/store/task', 'ProjectController@storeTask')->name('projects.storeTask')->middleware('auth');
+Route::put('projects/update/{task}/task', 'ProjectController@updateTask')->name('projects.updateTask')->middleware('auth');
+Route::delete('projects/delete/{task}/task', 'ProjectController@deleteTask')->name('projects.deleteTask')->middleware('auth');
+
 // UserController related routes
-Route::get('/profile', 'UserController@index')->name('profile');  
+Route::get('profile', 'UserController@index')->name('profile')->middleware('auth');  
 Route::get('profile/edit/{user}', 'UserController@edit')->name('profile.edit')->middleware('auth');
 Route::put('profile/update/{user}', 'UserController@update')->name('profile.update')->middleware('auth');
 Route::get('user/posts', 'UserController@posts')->name('user.posts')->middleware('auth');
 Route::get('user/projects', 'UserController@projects')->name('user.projects')->middleware('auth');
-Route::get('/projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');
+Route::get('user/tasks', 'UserController@tasks')->name('user.tasks')->middleware('auth');
+Route::get('projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');
+
 
 
 

@@ -16,8 +16,11 @@ class User extends Authenticatable
         'city',
         'password',
         'profile_image',
+        'role',
         'is_admin'
     ];
+
+    protected $dates = ['start_date', 'end_date'];
 
     /**
      * The attributes that are mass assignable.
@@ -49,6 +52,11 @@ class User extends Authenticatable
     }
   
     public function projects()  {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class)->withPivot('role');
     }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
+
 }

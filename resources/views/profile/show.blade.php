@@ -19,7 +19,7 @@
       <h1>
         Profile of {{ Auth::user()->name }} 
       </h1>
-  </div>
+    </div>
 
    <div class="card w-150">
     <div class="card-img-top d-flex align-center">
@@ -27,14 +27,14 @@
      <div>
   </div>
 
-  @if(session()->has('message'))
+    @if(session()->has('message'))
     <div style="position: absolute; padding: 5px; width: 320px;">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('message') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     </div>
-  </div>
-  @endif
+    @endif
                
     <div class="card-body">
       <a href="{{ route('profile.edit', $user) }}" class="btn float-right btn-primary">Edit profile</a>

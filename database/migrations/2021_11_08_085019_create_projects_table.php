@@ -15,16 +15,12 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id');
             $table->string('name');
             $table->text('intro');
             $table->text('description');
             $table->datetime('start_date');
             $table->datetime('end_date');
-            $table->timestamps();
-
-            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-            
+            $table->timestamps();              
         });
     }
 

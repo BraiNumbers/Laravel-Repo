@@ -41,12 +41,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/posts">Posts</a>
                     </li>
-                    <li class="nav-item dropdown">
+                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="/profile">My profile</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.posts') }}">My posts</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.projects') }}">My projects</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.tasks') }}">My tasks</a></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">

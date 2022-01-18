@@ -17,7 +17,7 @@ class PostSeeder extends Seeder
             'author_id' => '1',
             'title' => 'De seeder post',
             'intro' => 'De seeder intro',
-            'description' => 'De post die met seeden gemaakt is'
+            'description' => 'De post die met het seeden gemaakt is'
         ]);
     }
 }

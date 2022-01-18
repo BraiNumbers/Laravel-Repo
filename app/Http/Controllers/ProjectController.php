@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\User;
+use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\UpdateTaskRequest;
 
 
 class ProjectController extends Controller
@@ -78,7 +81,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findorfail($id);
+        $project = Project::with(['users'])->where('id', '=', $id)->first();
 
         $this->authorize('update', $project);
 
@@ -96,8 +99,6 @@ class ProjectController extends Controller
     {
         $project = Project::findorfail($id);
 
-        $this->authorize('update', $project);
-
         $project->name = $request->name;
         $project->intro = $request->intro;
         $project->description = $request->description;
@@ -107,10 +108,10 @@ class ProjectController extends Controller
         }
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
-
+       
         $project->save();
 
-        return redirect('/projects')->with(['message' => $project->name . ' has been updated', 'alert' => 'alert-success']);
+        return redirect('/projects')->with(['message' =>'The '. $project->name . ' has been updated', 'alert' => 'alert-success']);
 
     }
 
@@ -126,6 +127,8 @@ class ProjectController extends Controller
 
         $this->authorize('delete', $project);
 
+        $project->users()->detach();
+
         Storage::delete($project->project_image);
 
         $project->delete();
@@ -133,9 +136,16 @@ class ProjectController extends Controller
         return back()->with(['message' => $project->name . ' has been deleted', 'alert' => 'alert-success']);
     }
 
-    public function assign(Project $project, User $user) {
+    public function assign(Request $request, Project $project) {
+        $request->validate([
+            'user' => 'exists:users,id',
+            'role' => 'required',
+            'task' => 'max:255'
+        ]);
 
-        $project->users()->attach($user->id);
+        $user=User::find($request->user);
+
+        $project->users()->attach([$request->user => ['role' => $request['role']]]);
 
         return back()->with(['message' => $user->name . ' has been added to ' . $project->name, 'alert' => 'alert-success']);
 
@@ -147,5 +157,52 @@ class ProjectController extends Controller
 
         return back()->with(['message' => $user->name . ' has been removed from ' . $project->name, 'alert' => 'alert-success']);
 
-    }
+   }
+
+   public function task(Request $request, $task) {
+
+        $task = Task::findorfail($task);
+
+        return view('projects.task')->with('task', $task);
+   }
+
+  public function storeTask(StoreTaskRequest $request, Project $project) {
+        
+        $task = Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'project_id' => $project->id,
+            'user_id' => $request->user_id,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'completed' => false
+        ]);
+
+        return back()->with(['message' => ' The task has been added to the ' . $project->name, 'alert' => 'alert-success']);
+      
+  }
+
+  public function updateTask(UpdateTaskRequest $request, Task $task) {
+   
+    $task->title = $request->title;
+    $task->description = $request->description;
+    $task->start_date = $request->start_date;
+    $task->end_date = $request->end_date;
+    $task->completed = $request->has('completed');
+
+    $task->save();
+
+    return back()->with(['message' => $task->title . ' has been updated ', 'alert' => 'alert-success']);
+    
+  }
+
+  public function deleteTask($task) {
+
+    $task = Task::findorfail($task);
+
+    $task->delete();
+
+    return back()->with(['message' => $task->title . ' has been removed', 'alert' => 'alert-success']);
+
+  }
 }

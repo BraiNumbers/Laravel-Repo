@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Project;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class UpdateProjectRequest extends FormRequest
+class StoreTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,8 +15,9 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
-        
+       // dd($project);
+
+       return true; //Auth::user()->can('update', $this->project);
     }
 
     /**
@@ -24,12 +27,12 @@ class UpdateProjectRequest extends FormRequest
      */
     public function rules()
     {
-     
+        //dd(request());
+
         return [
-            'name' => 'required|max:255',
-            'intro' => 'required',
+            'title' => 'required',
             'description' => 'required',
-            'project_image' => 'image',
+            'user_id' => 'required|exists:users,id',
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date'
         ];

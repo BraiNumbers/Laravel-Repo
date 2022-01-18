@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Project;
+use App\Task;
 use App\User;
 
 class UserController extends Controller
@@ -34,7 +35,14 @@ class UserController extends Controller
         return view('profile/my-projects')->with('projects', $projects);
     }
 
-    public function edit(User $user)   {
+    public function tasks() {
+
+        $tasks = auth()->user()->tasks;
+
+        return view('profile/my-tasks')->with('tasks', $tasks);
+    }
+
+    public function edit(User $user) {
 
         $this->authorize('update', $user);
 
@@ -46,7 +54,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3|max:15',
             'email' => 'required|min:10|max:30',
-            'city' => 'required',
+            'city' => 'required|min:2|max:255',
             'profile_image' => 'image'
         ]);
 
@@ -54,7 +62,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->city = $request->input('city');
         if($request->has('profile_image')) {
-            Storage::delete(asset($user->profile_image)); 
+            Storage::delete($user->profile_image); 
             $user->profile_image = $request->profile_image->store('images/profileImage');  
         }
 

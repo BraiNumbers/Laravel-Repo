@@ -11,48 +11,48 @@
           <div class="bg-light">
               @include('partials.side-bar')
           </div>
-       </div>
-     </div>
-  </div>
+        </div>
+      </div>
+    </div>
   @endauth
 
-      <div class="col-md-9">
-      <div class="mb-3 d-flex justify-content-between align-items-center">
-        <h1>
-          My projects
-        </h1>
-        <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
+     <div class="col-md-9">
+       <div class="mb-3 d-flex justify-content-between align-items-center">
+          <h1>
+            My projects
+          </h1>
+         <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
       </div>  
   
         <table class="table table-bordered">
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Leader</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th colspan="3" scope="col">Leaders</th>
             </tr>
           </thead>
-          @foreach ($projects as $project)
+            @foreach ($projects as $project)
             <tbody>
             <tr class="table table-bordered">
               <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
-              <td><a>{{ $project->author->name }}</a></td>
-              <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
+              <td><a>{{ $project->leaders()->pluck('name')->join(', ') }}</a></td>
+              @can('update', $project)
+                <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
+              @endcan
               <td>
-              @if(auth()->user()->id == $project->author_id)
-                <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">
-                @method('DELETE')
-                @csrf
-                <button class="btn text-danger">Delete</button>
-                </form>
-                @endif
+                @can('delete', $project)
+                  <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn text-danger">Delete</button>
+                  </form>
+                @endcan
               </td>
               </tr>
             </tbody>
         @endforeach
       </table>
-  </div>
+    </div>
 
    @if(session()->has('message'))
     <div style="position: absolute; padding: 5px; width: 290px;">

@@ -45,8 +45,8 @@
                   @enderror  
               </div>
               </div>
-              <button type="submit" class="btn btn-primary float-md-end">Submit post</button>
-              <a href="/posts" class="mr-2 float-md-end">Cancel</a>
+              <button type="submit" class="btn btn-primary float-md-end">Submit</button>
+              <a href="/posts" class="btn btn-link float-md-end mr-1">Cancel</a>
             </form>       
           </div>
       </div>  

@@ -10,6 +10,9 @@
         <a class="list-group-item" class="card-link" href="{{ route('user.projects') }}">
             My projects
         </a> 
+        <a class="list-group-item" class="card-link" href="{{ route('user.tasks') }}">
+            My tasks
+        </a> 
         <a class="list-group-item" class="card-link" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

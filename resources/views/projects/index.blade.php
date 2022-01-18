@@ -39,7 +39,7 @@
             <tbody>
               <tr class="table table-bordered">
                 <td><a href="{{ route('projects.show', $project->id) }}" class="">{{ $project->name }}</td>
-                <td><a>{{ $project->author->name }}</a></td>
+                <td><a>{{ $project->leaders()->pluck('name')->join(', ') }}</a></td>
                 <td>{{ $project->start_date->format('d.m.y') }}</td>
                 <td>{{ $project->end_date->format('d.m.y') }}</td>
               </tr>
@@ -48,15 +48,14 @@
         </table>
       </div>
 
-  @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 350px;">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-  @endif
+      @if(session()->has('message'))
+        <div style="position: absolute; padding: 5px; width: 350px;">
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+       @endif
 
-  </div>
-
+ </div>
 @endsection

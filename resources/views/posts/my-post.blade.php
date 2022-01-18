@@ -26,15 +26,13 @@
             <thead>
               <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th colspan="3" scope="col">Author</th>
               </tr>
             </thead>
           @foreach ($posts as $post)
             <tbody>
               <tr class="table table-bordered">
-                <td><a href="{{ route('post.showcard', $post->id) }}" class="btn text">{{ $post->title }}</a></td>
+                <td><a href="{{ route('post.showcard', $post->id) }}">{{ $post->title }}</a></td>
                 <td><a>{{ Auth::user()->name }}</a></td>
                 <td><a href="{{ route('post.edit', $post->id) }}" class="btn text-primary">Edit</a></td>
                 <td>
@@ -45,7 +43,7 @@
                   </form> 
                   </td> 
                 </tr>
-          </tbody>
+            </tbody>
           @endforeach
       </table>
   </div>

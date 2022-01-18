@@ -15,11 +15,10 @@ class ProjectSeeder extends Seeder
     {
         $project = Project::Create([
             'id' => '1',
-            'author_id' => '1',
             'name' => 'Seeder project',
             'intro' => 'De seeder intro',
             'description' => 'De seeder omschrijving',
-            'project_image' => 'https://www.slashgear.com/wp-content/uploads/2015/10/default-placeholder-1024x1024-960x540.jpg',
+            'project_image' => 'https://www.elementar.com/fileadmin/_processed_/e/6/csm_ex-seeding-expectations-banner-image_f0baee9d5b.jpg',
             'start_date' => Carbon::create('2021', '11', '15'),
             'end_date' => Carbon::create('2022', '11', '15')
         ]);
