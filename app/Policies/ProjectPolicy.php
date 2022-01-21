@@ -96,4 +96,10 @@ class ProjectPolicy
     {
         return $project->leaders()->pluck('id')->contains($user->id);
     }
+
+    public function addTask(User $user, Project $project)
+    {
+        return $project->users()->pluck('id')->contains($user->id);
+    }
+
 }

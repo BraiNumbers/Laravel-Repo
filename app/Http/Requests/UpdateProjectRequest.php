@@ -23,15 +23,14 @@ class UpdateProjectRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-     
+    {     
         return [
             'name' => 'required|max:255',
             'intro' => 'required',
             'description' => 'required',
             'project_image' => 'image',
-            'start_date' => 'required|date|before:end_date',
-            'end_date' => 'required|date'
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date'
         ];
     }
 }

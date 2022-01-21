@@ -65,10 +65,5 @@ Route::put('profile/update/{user}', 'UserController@update')->name('profile.upda
 Route::get('user/posts', 'UserController@posts')->name('user.posts')->middleware('auth');
 Route::get('user/projects', 'UserController@projects')->name('user.projects')->middleware('auth');
 Route::get('user/tasks', 'UserController@tasks')->name('user.tasks')->middleware('auth');
+Route::get('projects/{project}/assign/user', 'UserController@assignUser')->name('user.assign')->middleware('auth');
 Route::get('projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');
-
-
-
-
-
-

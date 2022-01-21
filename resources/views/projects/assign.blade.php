@@ -13,41 +13,39 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          Add user to: {{ $project->name }}
+        </h1>
+     </div>
          
-     <div class="card col-md-9 mx-auto">
+     <div class="card col-md-12 mx-auto">
         <div class="card-body">
-          <h1 class="card-title">Add user</h1>
           <p class="card-title">Select a user:</p>
      <form method="post" action="{{route('projects.assign', ['project' => $project])}}">
         @method('POST')
         @csrf
      <div class="form-group row">
        <div class="col-sm-10">
-         <select class="js-example-basic-single" style="width: 100%" name="user">
+         <select class="js-example-basic-single" style="width: 90%" name="user">
             @foreach($users as $user) 
               <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
          </select>
+         <br><br>
           <p class="card-title">Select a role:</p>
-         <select class="js-example-basic-single" style="width: 100%" name="role">
-          <option value="Member">Member</option>
-          <option value="Leader">Leader</option>
+         <select class="js-example-basic-single" style="width: 90%" name="role">
+            <option value="Member">Member</option>
+            <option value="Leader">Leader</option>
          </select>
         </div>
       </div>
-      <button class="btn btn-primary float-md-end">Assign</button>
-         <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-link float-md-end mr-1">Back</a>
+      <button class="btn btn-primary float-md-end">Assign user</button>
+         <a href="/projects" class="btn btn-link float-md-end mr-1">Cancel</a>
      </form>    
   
-    @if(session()->has('message'))
-      <div style="position: absolute; padding: 5px; width: 390px;">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session('message') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      </div>
-    @endif
-
     <script>
       $(document).ready(function() {
         $('.js-example-basic-single').select2();

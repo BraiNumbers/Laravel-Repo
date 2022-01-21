@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand">{{ env('APP_NAME', 'Laravel') }}</a>
@@ -62,3 +64,12 @@
         </div>
     </div>
 </nav>
+  
+  @if(session()->has('message'))
+    <div style="padding: 5px;">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+         {{ session('message') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+   @endif

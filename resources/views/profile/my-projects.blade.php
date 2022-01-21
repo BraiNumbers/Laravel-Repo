@@ -24,44 +24,35 @@
          <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
       </div>  
   
-        <table class="table table-bordered">
-          <thead>
+       <table class="table table-bordered">
+         <thead>
             <tr>
               <th scope="col">Name</th>
               <th colspan="3" scope="col">Leaders</th>
             </tr>
           </thead>
-            @foreach ($projects as $project)
+           @foreach ($projects as $project)
             <tbody>
-            <tr class="table table-bordered">
+             <tr class="table table-bordered">
               <td><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
-              <td><a>{{ $project->leaders()->pluck('name')->join(', ') }}</a></td>
-              @can('update', $project)
-                <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
-              @endcan
-              <td>
-                @can('delete', $project)
-                  <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn text-danger">Delete</button>
-                  </form>
-                @endcan
-              </td>
+                <td><a>{{ $project->leaders()->pluck('name')->join(', ') }}</a></td>
+                  @can('update', $project)
+                    <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
+                  @endcan
+                <td>
+                  @can('delete', $project)
+                    <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">
+                      @method('DELETE')
+                      @csrf
+                      <button class="btn text-danger">Delete</button>
+                    </form>
+                  @endcan
+                </td>
               </tr>
-            </tbody>
-        @endforeach
-      </table>
-    </div>
-
-   @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 290px;">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </tbody>
+            @endforeach
+        </table>
       </div>
-    </div>
-   @endif
 
 </div>
 @endsection

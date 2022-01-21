@@ -10,7 +10,7 @@
         <div class="card" style="width: 12rem;">
           <div class="bg-light">
               @include('partials.side-bar')
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,15 +47,6 @@
             @endforeach 
         </table>
       </div>
-
-      @if(session()->has('message'))
-        <div style="position: absolute; padding: 5px; width: 350px;">
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        </div>
-       @endif
 
  </div>
 @endsection

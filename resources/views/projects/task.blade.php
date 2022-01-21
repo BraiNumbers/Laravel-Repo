@@ -16,15 +16,6 @@
       </div>
     </div>
 
-   @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 220px;">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-   @endif
-
     <div class="card col-md-9 mx-auto">
       <div class="card-body">
         <h1 class="card-title">Add task</h1>
@@ -77,7 +68,7 @@
                             @enderror 
                         </div>
                       </div>
-                    <button type="submit" class="btn btn-primary float-md-end">Assign</button>
+                    <button type="submit" class="btn btn-primary float-md-end">Assign task</button>
                     <a href="/projects" class="btn btn-link float-md-end mr-1">Cancel</a>
                 </form>       
              </div>

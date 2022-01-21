@@ -26,7 +26,8 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'intro' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'project_image' => 'image',
         ];
     }
 }

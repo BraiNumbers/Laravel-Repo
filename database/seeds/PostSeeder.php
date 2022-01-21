@@ -17,7 +17,8 @@ class PostSeeder extends Seeder
             'author_id' => '1',
             'title' => 'De seeder post',
             'intro' => 'De seeder intro',
-            'description' => 'De post die met het seeden gemaakt is'
+            'description' => 'De post die met het seeden gemaakt is',
+            'post_image' => 'https://www.canna.nl/sites/default/files/images/articles/nl/articles-kweken-voor-beginners_text_3.jpg',
         ]);
     }
 }

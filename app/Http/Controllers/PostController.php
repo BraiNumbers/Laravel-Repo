@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -44,6 +45,7 @@ class PostController extends Controller
             'title' => $request->title,
             'intro' => $request->intro,
             'description' => $request->description,
+            'post_image' => $request->post_image->store('images/posts'),
             'author_id' => auth()->id()
         ]);
         
@@ -101,6 +103,10 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->intro = $request->intro;
         $post->description = $request->description;
+        if($request->has('post_image')) {
+            Storage::delete(asset($post->post_image)); 
+            $post->post_image = $request->post_image->store('images/posts');  
+        }
 
         $post->save();
 
@@ -118,6 +124,8 @@ class PostController extends Controller
         $post = Post::findorfail($post);
 
         $this->authorize('delete', $post);
+
+        Storage::delete($post->post_image);
         
         $post->delete();
         

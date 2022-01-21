@@ -15,14 +15,14 @@
   </div>
 
     <div class="col-md-9">
-    <div class="mb-3 d-flex justify-content-between align-items-center">
-      <h1>
-        My posts
-      </h1>
-        <a class="btn btn-primary col-md- float-md-end" href="/posts/create" role="button">Create post</a>
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          My posts
+        </h1>
+      <a class="btn btn-primary col-md- float-md-end" href="/posts/create" role="button">Create post</a>
     </div> 
   
-        <table class="table table-bordered">
+      <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">Title</th>
@@ -37,26 +37,17 @@
                 <td><a href="{{ route('post.edit', $post->id) }}" class="btn text-primary">Edit</a></td>
                 <td>
                   <form action="{{ route('post.destroy', ['id' => $post->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this post?')">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn text-danger">Delete</button>
+                      @method('DELETE')
+                      @csrf
+                      <button class="btn text-danger">Delete</button>
                   </form> 
-                  </td> 
-                </tr>
+                </td> 
+              </tr>
             </tbody>
           @endforeach
-      </table>
-  </div>
-    
-  @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 290px;">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+       </table>
     </div>
-  @endif
-  
+     
 </div>
 
 @endsection

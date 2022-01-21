@@ -2,4 +2,8 @@
     min-height: 200px;
 }
 
-
+.alert {
+    position:absolute;
+    z-index: 999;
+    width: 99%;
+}

@@ -178,7 +178,9 @@ class ProjectController extends Controller
             'completed' => false
         ]);
 
-        return back()->with(['message' => ' The task has been added to the ' . $project->name, 'alert' => 'alert-success']);
+        $this->authorize('addTask', $project);
+
+        return back()->with(['message' => $task->title . ' has been added to ' . $project->name, 'alert' => 'alert-success']);
       
   }
 
@@ -202,7 +204,7 @@ class ProjectController extends Controller
 
     $task->delete();
 
-    return back()->with(['message' => $task->title . ' has been removed', 'alert' => 'alert-success']);
+    return back()->with(['message' => $task->title . ' has been removed from ' . $task->project->name, 'alert' => 'alert-success']);
 
   }
 }

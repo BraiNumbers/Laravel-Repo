@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+
 @section('content')
 
-  <div class="d-flex justify-content-between">
+ <div class="d-flex justify-content-between">
 
     @auth
       <div class="col-md-2">
@@ -27,20 +29,11 @@
      <div>
   </div>
 
-    @if(session()->has('message'))
-    <div style="position: absolute; padding: 5px; width: 320px;">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-    @endif
-               
-    <div class="card-body">
+     <div class="card-body">
       <a href="{{ route('profile.edit', $user) }}" class="btn float-right btn-primary">Edit profile</a>
       <h4 class="card-title">User details:</h4>
       <p class="card-title">Name: {{ Auth::user()->name }} </p>
-      <p class="card-title">Email: {{ Auth::user()->email }}</p>
+      <p class="card-title">Email address: {{ Auth::user()->email }}</p>
       <p class="card-title">City: {{ Auth::user()->city }}</p>
     </div>
 

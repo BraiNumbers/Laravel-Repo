@@ -80,4 +80,5 @@ class UserController extends Controller
 
         return view('/projects/assign')->with('users', $users)->with('project', $project);
     }
+
 }

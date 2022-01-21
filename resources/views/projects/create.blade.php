@@ -19,6 +19,7 @@
     <div class="card col-md-9 mx-auto">
       <div class="card-body">
         <h1 class="card-title">Create project</h1>
+          <br>
            <form action="{{ route('projects.store') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
               @method('POST')
               @csrf
@@ -61,7 +62,7 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Start date</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" name="start_date">
+                    <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}">
                       @error('start_date') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror   
@@ -70,7 +71,7 @@
                 <div class="form-group row">
                 <label class="col-sm-2 col-form-label">End date</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" name="end_date">
+                    <input type="date" class="form-control" name="end_date" value="{{ old('end_date') }}">
                       @error('end_date') 
                       <small class='text-danger'>{{$message}}</small>
                       @enderror   

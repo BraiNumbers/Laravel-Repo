@@ -17,7 +17,7 @@ class StoreTaskRequest extends FormRequest
     {
        // dd($project);
 
-       return true; //Auth::user()->can('update', $this->project);
+       return true;
     }
 
     /**
@@ -33,8 +33,8 @@ class StoreTaskRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'user_id' => 'required|exists:users,id',
-            'start_date' => 'required|date|before:end_date',
-            'end_date' => 'required|date'
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date'
         ];
     }
 }
