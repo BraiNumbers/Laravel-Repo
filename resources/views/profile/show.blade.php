@@ -21,6 +21,7 @@
       <h1>
         Profile of {{ Auth::user()->name }} 
       </h1>
+      <a href="{{ route('profile.edit', $user) }}" class="btn float-right btn-primary">Edit profile</a>
     </div>
 
    <div class="card w-150">
@@ -29,8 +30,7 @@
      <div>
   </div>
 
-     <div class="card-body">
-      <a href="{{ route('profile.edit', $user) }}" class="btn float-right btn-primary">Edit profile</a>
+    <div class="card-body">
       <h4 class="card-title">User details:</h4>
       <p class="card-title">Name: {{ Auth::user()->name }} </p>
       <p class="card-title">Email address: {{ Auth::user()->email }}</p>

@@ -32,6 +32,23 @@ Route::get ('/posts/create', function () {
 
 Auth::routes();
 
+// AdminController related routes
+Route::get('admin/users', 'AdminController@index')->name('admin.index')->middleware('admin');
+Route::get('admin/posts', 'AdminController@adminPost')->name('admin.posts')->middleware('admin');
+Route::get('admin/projects', 'AdminController@adminProject')->name('admin.projects')->middleware('admin');
+Route::get('admin/tasks', 'AdminController@adminTask')->name('admin.tasks')->middleware('admin');
+Route::delete('admin/delete/user/{id}', 'Admincontroller@destroy')->name('admin.destroyUser')->middleware('admin');
+
+// UserController related routes
+Route::get('profile', 'UserController@index')->name('profile')->middleware('auth');  
+Route::get('profile/edit/{user}', 'UserController@edit')->name('profile.edit')->middleware('auth');
+Route::put('profile/update/{user}', 'UserController@update')->name('profile.update')->middleware('auth');
+Route::get('user/posts', 'UserController@posts')->name('user.posts')->middleware('auth');
+Route::get('user/projects', 'UserController@projects')->name('user.projects')->middleware('auth');
+Route::get('user/tasks', 'UserController@tasks')->name('user.tasks')->middleware('auth');
+Route::get('projects/{project}/assign/user', 'UserController@assignUser')->name('user.assign')->middleware('auth');
+Route::get('projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');
+
 // PostController related routes
 Route::get('posts', 'PostController@index')->name('post.index');
 Route::get('posts/show/{id}', 'PostController@showcard')->name('post.showcard');
@@ -57,13 +74,3 @@ Route::get('projects/{project}/task/create', 'ProjectController@task')->name('pr
 Route::post('projects/{project}/store/task', 'ProjectController@storeTask')->name('projects.storeTask')->middleware('auth');
 Route::put('projects/update/{task}/task', 'ProjectController@updateTask')->name('projects.updateTask')->middleware('auth');
 Route::delete('projects/delete/{task}/task', 'ProjectController@deleteTask')->name('projects.deleteTask')->middleware('auth');
-
-// UserController related routes
-Route::get('profile', 'UserController@index')->name('profile')->middleware('auth');  
-Route::get('profile/edit/{user}', 'UserController@edit')->name('profile.edit')->middleware('auth');
-Route::put('profile/update/{user}', 'UserController@update')->name('profile.update')->middleware('auth');
-Route::get('user/posts', 'UserController@posts')->name('user.posts')->middleware('auth');
-Route::get('user/projects', 'UserController@projects')->name('user.projects')->middleware('auth');
-Route::get('user/tasks', 'UserController@tasks')->name('user.tasks')->middleware('auth');
-Route::get('projects/{project}/assign/user', 'UserController@assignUser')->name('user.assign')->middleware('auth');
-Route::get('projects/{project}/assign', 'UserController@getUsers')->name('user.add')->middleware('auth');

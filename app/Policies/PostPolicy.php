@@ -92,5 +92,11 @@ class PostPolicy
         //
     }
     
+    public function before($user, $post)
+    {
+    if (auth()->user()->is_admin == 1){
+        return true;
+    }
+}
 
 }

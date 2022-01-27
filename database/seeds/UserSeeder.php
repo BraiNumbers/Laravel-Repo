@@ -13,7 +13,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'id' => '1',
+        'id' => '1',
+        'name' => 'Admin',
+        'email' => 'Admin@mail.com',
+        'city' => 'Knowhere',
+        'password' => bcrypt('password'),
+        'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg',
+        'is_admin' => '1'
+        ]);
+        User::create([
+            'id' => '2',
             'name' => 'Andrea',
             'email' => 'Andrea@mail.com',
             'city' => 'Nunspeet',
@@ -21,7 +30,7 @@ class UserSeeder extends Seeder
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
-            'id' => '2',
+            'id' => '3',
             'name' => 'Bryan',
             'email' => 'Bryan@mail.com',
             'city' => 'Hoogeveen',
@@ -29,15 +38,15 @@ class UserSeeder extends Seeder
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
-            'id' => '3',
+            'id' => '4',
             'name' => 'Martijn',
             'email' => 'Martijn@mail.com',
-            'city' => 'Groningen',
+            'city' => 'Amstelveen',
             'password' => bcrypt('password'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
-            'id' => '4',
+            'id' => '5',
             'name' => 'Patrick',
             'email' => 'Patrick@mail.com',
             'city' => 'Groningen',
@@ -45,10 +54,10 @@ class UserSeeder extends Seeder
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
-            'id' => '5',
+            'id' => '6',
             'name' => 'Marco',
             'email' => 'MarcoPolo@mail.com',
-            'city' => 'Nunspeet',
+            'city' => 'Venetië',
             'password' => bcrypt('password'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);

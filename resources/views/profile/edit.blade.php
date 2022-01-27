@@ -13,10 +13,16 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          Update profile
+        </h1>
+     </div>
     
-    <div class="card col-md-9 mx-auto">
-      <div class="card-body">
-      <h1 class="card-title">Update profile</h1>
+     <div class="card col-md-12 mx-auto">
+        <div class="card-body">
         <br>
         <form action="{{route('profile.update', $user)}}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
           @method('PUT')

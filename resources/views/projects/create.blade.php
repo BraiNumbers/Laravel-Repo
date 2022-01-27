@@ -16,9 +16,15 @@
       </div>
     @endauth
 
-    <div class="card col-md-9 mx-auto">
+    <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          Create project
+        </h1>
+     </div>
+
+    <div class="card col-md-12 mx-auto">
       <div class="card-body">
-        <h1 class="card-title">Create project</h1>
           <br>
            <form action="{{ route('projects.store') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
               @method('POST')
@@ -77,7 +83,7 @@
                       @enderror   
                    </div>
                  </div>
-                <button type="submit" class="btn btn-primary float-md-end">Submit</button>
+                <button type="submit" class="btn btn-primary float-md-end">Submit project</button>
               <a href="/projects" class="btn btn-link float-md-end mr-1">Cancel</a>
            </form>       
         </div>

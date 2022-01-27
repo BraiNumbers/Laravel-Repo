@@ -25,19 +25,36 @@
         </h1>
       </div>  
      
-        <table class="table table-bordered">
+    <ul class="nav nav-tabs" style="border-bottom:0px" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Tasks</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Completed</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">In progress</button>
+      </li>
+    </ul>
+        
+   <div class="card col-md-12 mx-auto">
+     <div class="card-body">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <br>
+          <table class="table">
           <thead>
             <tr>
-              <th scope="col">Tasks</th>
-              <th scope="col">Descriptions</th>
-              <th scope="col">Projects</th>
+              <th scope="col">Task</th>
+              <th scope="col">Description</th>
+              <th scope="col">Project</th>
               <th scope="col">Completed</th>
               <th scope="col"></th>
             </tr>
           </thead>
           @foreach ($tasks as $task)
             <tbody>
-              <tr class="table table-bordered">
+              <tr class="table">
                   <td><a data-toggle="modal" data-target="#modal-{{$task->id}}" role="button" class="text-primary" href="{{ route('projects.updateTask',  $task->id) }}">{{ $task->title }}</a></td>
                   <td><a>{!! $task->description !!}</a></td>
                   <td><a href="{{ route('projects.show', $task->project->id) }}">{{ $task->project->name }}</a></td>
@@ -49,13 +66,62 @@
                         <button class="btn text-danger">Delete</button>
                       </form>
                     </td>
-                  </td>
-                </tr>
+                   </td>
+                 </tr>
               </tbody>
            @endforeach
         </table>
       </div>  
-
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <br>
+            <table class="table">
+           <thead>
+              <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Description</th>
+                <th scope="col">Project</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+              </tr>
+            </thead>
+              @foreach ($tasks->where('completed', '1') as $task)
+                <tr class="table">
+                  <td><a data-toggle="modal" data-target="#modal-{{$task->id}}" role="button" class="text-primary" href="{{ route('projects.updateTask',  $task->id) }}">{{ $task->title }}</a></td>
+                  <td><a>{!! $task->description !!}</a></td>
+                  <td><a href="{{ route('projects.show', $task->project->id) }}">{{ $task->project->name }}</a></td>
+                  <td><a>{{ $task->start_date->format('d-m-y') }}</a></td>
+                  <td><a>{{ $task->end_date->format('d-m-y') }}</a></td>
+                </tr>
+              @endforeach
+           </tbody>
+          </table>
+          </div>
+         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+         <br> 
+          <table class="table">
+           <thead>
+              <tr>                
+                <th scope="col">Task</th>
+                <th scope="col">Description</th>
+                <th scope="col">Project</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+              </tr>
+            </thead>
+             @foreach ($tasks->where('completed', '0') as $task)
+                <tr class="table">
+                  <td><a data-toggle="modal" data-target="#modal-{{$task->id}}" role="button" class="text-primary" href="{{ route('projects.updateTask',  $task->id) }}">{{ $task->title }}</a></td>
+                  <td><a>{!! $task->description !!}</a></td>
+                  <td><a href="{{ route('projects.show', $task->project->id) }}">{{ $task->project->name }}</a></td>
+                  <td><a>{{ $task->start_date->format('d-m-y') }}</a></td>
+                  <td><a>{{ $task->end_date->format('d-m-y') }}</a></td>
+                </tr>
+               @endforeach
+            </tbody>
+           </table>
+        </div> 
+      </div>
+     
       @foreach ($tasks as $task)
         <div class="modal fade" id="modal-{{$task->id}}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
@@ -116,7 +182,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">Update task</button>
                   </div>
                   </form>
                 </div>

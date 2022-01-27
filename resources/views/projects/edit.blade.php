@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    @if(session()->has('message'))
+   @if(session()->has('message'))
     <div style="position: absolute; padding: 5px; width: 290px;">
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('message') }}

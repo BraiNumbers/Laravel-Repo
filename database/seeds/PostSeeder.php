@@ -13,8 +13,8 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::Create([
-            'id' => '1',
-            'author_id' => '1',
+            'id' => '2',
+            'author_id' => '2',
             'title' => 'De seeder post',
             'intro' => 'De seeder intro',
             'description' => 'De post die met het seeden gemaakt is',

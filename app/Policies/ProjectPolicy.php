@@ -102,4 +102,10 @@ class ProjectPolicy
         return $project->users()->pluck('id')->contains($user->id);
     }
 
+    public function before($user, $project, $task)
+    {
+    if (auth()->user()->is_admin == 1){
+        return true;
+    }
+}
 }

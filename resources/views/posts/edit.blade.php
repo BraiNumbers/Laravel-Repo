@@ -16,9 +16,15 @@
     </div>
   </div>
 
-    <div class="card col-md-9 mx-auto">
+    <div class="col-md-9">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h1>
+          Update post
+        </h1>
+     </div>
+
+    <div class="card col-md-12 mx-auto">
         <div class="card-body">
-          <h1 class="card-title">Update post</h1>
            <br>
             <form action="{{route('post.update', $post->id)}}"  method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
               @method("PUT")    

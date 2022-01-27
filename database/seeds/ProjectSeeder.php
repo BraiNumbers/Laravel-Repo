@@ -14,7 +14,7 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         $project = Project::Create([
-            'id' => '1',
+            'id' => '2',
             'name' => 'Seeder project',
             'intro' => 'De seeder intro',
             'description' => 'De seeder omschrijving',
@@ -22,6 +22,6 @@ class ProjectSeeder extends Seeder
             'start_date' => Carbon::create('2021', '11', '15'),
             'end_date' => Carbon::create('2022', '11', '15')
         ]);
-        $project->users()->attach(1);
+        $project->users()->attach(2);
     }
 }

@@ -68,7 +68,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/profile')->with(['message' => 'The profile update was successful', 'alert' => 'alert-success']);
+        return back()->with(['message' => 'The profile of ' . $user->name . ' has been updated', 'alert']);
     }
     
     public function getUsers(Project $project) {

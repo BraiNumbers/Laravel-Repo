@@ -10,5 +10,9 @@ class Post extends Model
 
       protected $dates = ['date_begin', 'date_end'];
 
+      public function user()  {
+            return $this->belongsToMany(User::class)->withPivot('role');
+        }
+
 }
 

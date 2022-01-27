@@ -57,7 +57,7 @@ class ProjectController extends Controller
 
         $project->users()->attach(auth()->id());
 
-        return redirect(route('projects.index'))->with(['message' => $project->name . ' has been created', 'alert' => 'alert-success']);
+        return redirect(route('projects.index'))->with(['message' => 'The project has been created', 'alert']);
     }
 
     /**
@@ -111,7 +111,7 @@ class ProjectController extends Controller
        
         $project->save();
 
-        return redirect('/projects')->with(['message' =>'The '. $project->name . ' has been updated', 'alert' => 'alert-success']);
+        return redirect('/projects')->with(['message' =>'The '. $project->name . ' has been updated', 'alert']);
 
     }
 
@@ -127,13 +127,15 @@ class ProjectController extends Controller
 
         $this->authorize('delete', $project);
 
+        $project->tasks()->delete();
+
         $project->users()->detach();
 
         Storage::delete($project->project_image);
 
         $project->delete();
 
-        return back()->with(['message' => $project->name . ' has been deleted', 'alert' => 'alert-success']);
+        return back()->with(['message' => $project->name . ' has been deleted', 'alert']);
     }
 
     public function assign(Request $request, Project $project) {
@@ -147,7 +149,7 @@ class ProjectController extends Controller
 
         $project->users()->attach([$request->user => ['role' => $request['role']]]);
 
-        return back()->with(['message' => $user->name . ' has been added to ' . $project->name, 'alert' => 'alert-success']);
+        return back()->with(['message' => $user->name . ' has been added to ' . $project->name, 'alert']);
 
     }
     
@@ -155,7 +157,7 @@ class ProjectController extends Controller
         
         $project->users()->detach($user->id);
 
-        return back()->with(['message' => $user->name . ' has been removed from ' . $project->name, 'alert' => 'alert-success']);
+        return back()->with(['message' => $user->name . ' has been removed from ' . $project->name, 'alert']);
 
    }
 
@@ -180,7 +182,7 @@ class ProjectController extends Controller
 
         $this->authorize('addTask', $project);
 
-        return back()->with(['message' => $task->title . ' has been added to ' . $project->name, 'alert' => 'alert-success']);
+        return back()->with(['message' => $task->title . ' has been added to ' . $project->name, 'alert']);
       
   }
 
@@ -194,7 +196,7 @@ class ProjectController extends Controller
 
     $task->save();
 
-    return back()->with(['message' => $task->title . ' has been updated ', 'alert' => 'alert-success']);
+    return back()->with(['message' => $task->title . ' has been updated ', 'alert']);
     
   }
 
@@ -204,7 +206,7 @@ class ProjectController extends Controller
 
     $task->delete();
 
-    return back()->with(['message' => $task->title . ' has been removed from ' . $task->project->name, 'alert' => 'alert-success']);
+    return back()->with(['message' => $task->title . ' has been removed from ' . $task->project->name, 'alert']);
 
   }
 }

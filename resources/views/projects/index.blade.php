@@ -22,7 +22,7 @@
           Projects
         </h1>
         @auth
-        <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
+          <a class="btn btn-primary col-md- float-md-end" href="{{ route('projects.create') }}" role="button">Create project</a>
         @endauth
      </div>
 

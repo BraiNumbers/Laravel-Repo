@@ -28,7 +28,7 @@
          <thead>
             <tr>
               <th scope="col">Name</th>
-              <th colspan="3" scope="col">Leaders</th>
+              <th colspan="3" scope="col">Leader</th>
             </tr>
           </thead>
            @foreach ($projects as $project)

@@ -49,7 +49,7 @@ class PostController extends Controller
             'author_id' => auth()->id()
         ]);
         
-        return redirect('/posts')->with(['message' => 'The post has been created', 'alert' => 'alert-success']);
+        return redirect('/posts')->with(['message' => 'The post has been created', 'alert']);
     }
 
     /**
@@ -110,7 +110,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/posts')->with(['message' => 'The post has been updated', 'alert' => 'alert-success']);
+        return redirect('/posts')->with(['message' => $post->title . ' has been updated', 'alert']);
     }
 
     /**
@@ -129,7 +129,7 @@ class PostController extends Controller
         
         $post->delete();
         
-        return back()->with(['message' => 'The post has been deleted', 'alert' => 'alert-success']);
+        return back()->with(['message' => $post->title . ' has been deleted', 'alert']);
     }
         
 }
