@@ -22,4 +22,10 @@ class UserPolicy
     public function update(User $auth, User $user) {
         return $auth->id === $user->id;
     }
+
+    public function before($user)
+    {
+    if (auth()->user()->is_admin == 1){
+        return true;
+    }}
 }

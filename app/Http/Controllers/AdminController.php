@@ -6,8 +6,10 @@ use App\Post;
 use App\Project;
 use App\User;
 use App\Task;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -28,9 +30,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function adminUser()
     {
-        //
+        return view('admin/createUser'); 
     }
 
     /**
@@ -39,9 +41,17 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request, User $user)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'city' => $request->city,
+            'password' => Hash::make($user['password']),
+            'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
+        ]);
+        
+        return back()->with(['message' => 'The user has been created', 'alert']);
     }
 
     /**
@@ -119,4 +129,6 @@ class AdminController extends Controller
 
         return view('admin/tasks', compact('tasks'));
     }
+
+    
 }

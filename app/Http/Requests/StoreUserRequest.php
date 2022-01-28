@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Project;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreTaskRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user();
+        return auth()->user()->is_admin == 1;
     }
 
     /**
@@ -25,14 +23,11 @@ class StoreTaskRequest extends FormRequest
      */
     public function rules()
     {
-        //dd(request());
-
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'user_id' => 'required|exists:users,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date'
+            'name' => ['required', 'string', 'min:3', 'max:15'],
+            'email' => ['required', 'string', 'email', 'min:10' ,'max:30', 'unique:users'],
+            'city' => ['required', 'min:3', 'max:30'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 }

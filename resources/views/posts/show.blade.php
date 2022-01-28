@@ -27,7 +27,7 @@
      </div>
 
     <div class="card col-md-12 mx-auto">
-      <img src="{{ asset($post->post_image) }}" style="object-fit: cover; height: 250px;" class="card-img-top">
+      <img src="{{ asset($post->post_image) }}" style="object-fit: cover; height: 250px;">
           <div class="card-body">
           <p class="card-text">{!! $post->description !!}</p>
           <p class="card-text"><small class="text-muted">Published on: {{ $post->created_at->format('d-m-y') }}</small></p>

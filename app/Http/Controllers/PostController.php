@@ -110,7 +110,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/posts')->with(['message' => $post->title . ' has been updated', 'alert']);
+        return redirect('/posts')->with(['message' => 'The '. $post->title . ' has been updated', 'alert']);
     }
 
     /**
@@ -129,7 +129,7 @@ class PostController extends Controller
         
         $post->delete();
         
-        return back()->with(['message' => $post->title . ' has been deleted', 'alert']);
+        return back()->with(['message' => 'The '. $post->title . ' has been deleted', 'alert']);
     }
         
 }

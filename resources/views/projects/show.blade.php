@@ -64,8 +64,7 @@
     </ul>
 
     <div class="card col-md-12 mx-auto">
-      <div class="card-body">
-     
+      <div class="card-body">     
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <br>

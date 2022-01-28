@@ -19,7 +19,7 @@
         <h1>
            User section
         </h1>
-           <a class="btn btn-primary col-md- float-md-end" href="#" role="button">Create user</a>
+          <a class="btn btn-primary col-md- float-md-end" href="{{ route('admin.user') }}" role="button">Create user</a>
        </div>
 
      <table class="table table-bordered">

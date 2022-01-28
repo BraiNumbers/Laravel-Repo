@@ -135,7 +135,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return back()->with(['message' => $project->name . ' has been deleted', 'alert']);
+        return back()->with(['message' => 'The '. $project->name . ' has been deleted', 'alert']);
     }
 
     public function assign(Request $request, Project $project) {
@@ -149,7 +149,7 @@ class ProjectController extends Controller
 
         $project->users()->attach([$request->user => ['role' => $request['role']]]);
 
-        return back()->with(['message' => $user->name . ' has been added to ' . $project->name, 'alert']);
+        return back()->with(['message' => $user->name . ' has been added to the ' . $project->name, 'alert']);
 
     }
     
@@ -157,7 +157,7 @@ class ProjectController extends Controller
         
         $project->users()->detach($user->id);
 
-        return back()->with(['message' => $user->name . ' has been removed from ' . $project->name, 'alert']);
+        return back()->with(['message' => $user->name . ' has been removed from the ' . $project->name, 'alert']);
 
    }
 
@@ -182,7 +182,7 @@ class ProjectController extends Controller
 
         $this->authorize('addTask', $project);
 
-        return back()->with(['message' => $task->title . ' has been added to ' . $project->name, 'alert']);
+        return back()->with(['message' => $task->title . ' has been added to the ' . $project->name, 'alert']);
       
   }
 
@@ -206,7 +206,7 @@ class ProjectController extends Controller
 
     $task->delete();
 
-    return back()->with(['message' => $task->title . ' has been removed from ' . $task->project->name, 'alert']);
+    return back()->with(['message' => $task->title . ' has been removed from the ' . $task->project->name, 'alert']);
 
   }
 }

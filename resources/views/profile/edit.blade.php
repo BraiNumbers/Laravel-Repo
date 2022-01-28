@@ -22,7 +22,7 @@
      </div>
     
      <div class="card col-md-12 mx-auto">
-        <div class="card-body">
+       <div class="card-body">
         <br>
         <form action="{{route('profile.update', $user)}}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
           @method('PUT')

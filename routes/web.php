@@ -37,6 +37,8 @@ Route::get('admin/users', 'AdminController@index')->name('admin.index')->middlew
 Route::get('admin/posts', 'AdminController@adminPost')->name('admin.posts')->middleware('admin');
 Route::get('admin/projects', 'AdminController@adminProject')->name('admin.projects')->middleware('admin');
 Route::get('admin/tasks', 'AdminController@adminTask')->name('admin.tasks')->middleware('admin');
+Route::get('admin/create/user', 'AdminController@adminUser')->name('admin.user')->middleware('admin');
+Route::post('admin/store', 'AdminController@store')->name('admin.store')->middleware('admin');
 Route::delete('admin/delete/user/{id}', 'Admincontroller@destroy')->name('admin.destroyUser')->middleware('admin');
 
 // UserController related routes
