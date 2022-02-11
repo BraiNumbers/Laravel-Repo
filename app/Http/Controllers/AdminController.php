@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function adminUser()
     {
-        return view('admin/createUser'); 
+        return view('admin/createUser');
     }
 
     /**

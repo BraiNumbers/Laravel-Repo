@@ -17,7 +17,7 @@
     <div class="col-md-9">
       <div class="mb-3 d-flex justify-content-between align-items-center">
         <h1>
-           Create user
+           Create a new user
         </h1>
       </div>
 

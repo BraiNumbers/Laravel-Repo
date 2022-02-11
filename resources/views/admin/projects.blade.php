@@ -25,13 +25,14 @@
      <table class="table table-bordered">
        <thead>
           <tr>
-            <th scope="col" colspan="3">Project</th>
+            <th scope="col" colspan="4">Project</th>
           </tr>
         </thead>
             @foreach ($projects as $project)
             <tbody>
               <tr class="table table-bordered">
               <td><a href="{{ route('projects.show', $project->id) }}" class="">{{ $project->name }}</td>
+              <td><a>{{ $project->leaders()->pluck('name')->join(', ') }}</a></td>
               <td><a href="{{ route('projects.edit',  $project->id) }}" class="btn text-primary">Edit</a></td>
                 <td>
                   <form action="{{route('projects.destroy', ['id' => $project->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this project?')">

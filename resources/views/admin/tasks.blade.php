@@ -24,7 +24,7 @@
      <table class="table table-bordered">
        <thead>
           <tr>
-            <th scope="col" colspan="3">Task</th>
+            <th scope="col" colspan="4">Task</th>
           </tr>
         </thead>
             @foreach ($tasks as $task)
@@ -32,6 +32,7 @@
               <tr class="table table-bordered">
               <td><a data-toggle="modal" data-target="#modal-{{$task->id}}" role="button" class="text-primary" href="{{ route('projects.updateTask',  $task->id) }}">{{ $task->title }}</a></td>
               <td><a>{!! $task->completed ? "✓" : "&times;" !!}</a></td>
+              <td><a>{{ $task->user->name }}</td></a>
                 <td>
                   <form action="{{route('projects.deleteTask', [$task->id]) }}" method="post" onclick="return confirm('Are you sure you want to delete this task?')">
                      @method('DELETE')

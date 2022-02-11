@@ -70,7 +70,7 @@
     </div>
  </nav>
   
-  @if(session()->has('message'))
+ @if(session()->has('message'))
     <div style="padding: 5px;">
       <div class="alert alert-dark alert-dismissible fade show" role="alert">
          {{ session('message') }}
