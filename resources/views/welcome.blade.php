@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Custom Website</title>
+        <title>Bryan Kreeft</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -76,7 +76,9 @@
                 <div class="title m-b-md">
                     Bryan Kreeft
                 </div>
+                <a href="https://www.linkedin.com/in/bryan-k-8b5860208/?originalSubdomain=nl" target="_blank"><i class="fa-brands fa-linkedin fa-2x"></i>
             </div>
         </div>
+        <script src="https://kit.fontawesome.com/bc555db243.js" crossorigin="anonymous"></script>
     </body>
 </html>
