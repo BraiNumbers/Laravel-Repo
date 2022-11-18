@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         'name' => 'Admin',
         'email' => 'Admin@mail.com',
         'city' => 'Knowhere',
-        'password' => bcrypt('password'),
+        'password' => bcrypt('W35y$C4wHur6KUj'),
         'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg',
         'is_admin' => '1'
         ]);
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'name' => 'Andrea',
             'email' => 'Andrea@mail.com',
             'city' => 'Nunspeet',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('W35y$C4wHur6KUj'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Bryan',
             'email' => 'Bryan@mail.com',
             'city' => 'Hoogeveen',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('W35y$C4wHur6KUj'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'name' => 'Martijn',
             'email' => 'Martijn@mail.com',
             'city' => 'Amstelveen',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('W35y$C4wHur6KUj'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             'name' => 'Patrick',
             'email' => 'Patrick@mail.com',
             'city' => 'Groningen',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('W35y$C4wHur6KUj'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
         User::create([
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
             'name' => 'Marco',
             'email' => 'MarcoPolo@mail.com',
             'city' => 'Venetië',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('W35y$C4wHur6KUj'),
             'profile_image' => 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg'
         ]);
     }

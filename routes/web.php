@@ -27,8 +27,11 @@ Route::get ('/', function () {
 Route::get ('/posts/create', function () {
     return view('/posts/create');}); 
 
- Route::get ('/projects/create', function () {
+Route::get ('/projects/create', function () {
     return view('/projects/create');}); 
+
+Route::get ('/api', function () {
+        return view('/api/post');}); 
 
 Auth::routes();
 

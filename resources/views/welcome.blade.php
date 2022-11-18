@@ -69,13 +69,12 @@
                     <a href="{{ url('/projects') }}">Projects</a>
                     <a href="{{ url('/posts') }}">Posts</a>
                     <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Custom Website
+                    Bryan Kreeft
                 </div>
             </div>
         </div>

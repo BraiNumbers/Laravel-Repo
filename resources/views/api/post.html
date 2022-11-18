@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>API opdracht</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="api/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="/projects">Bryankreeft.nl</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<body>
+<div class="input-group input-group-lg">
+    <span class="input-group-text" id="inputGroup-sizing-lg">User ID</span>
+    <input type="text" style="text-align: center" placeholder="Choose user 1/10..." id="userID" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+    <input type="submit" id="userIDbutton" value="Get user">
+</div>
+
+<div class="input-group input-group-lg">
+    <span class="input-group-text">Post ID</span>
+    <input type="text" style="text-align: center" placeholder="Choose post 1/100..." id="postID" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <input type="submit" id="postIDbutton" value="Get post">
+</div>
+
+<div class="input-group input-group-lg">
+    <span class="input-group-text">Comment ID</span>
+    <input type="text" style="text-align: center" placeholder="Choose comment 1/500..." id="commentID" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <input type="submit" id="commentIDbutton" value="Get comment">
+</div>
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <b>No user ID has been entered...</b>
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body"> <p id="postPlek">No post ID has been entered...</p></div>
+            <ol class="list-group">
+                <li class="list-group-item list-group-item-dark" id="commentPlek">No comment ID has been entered....</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+<script>
+    // User
+document.getElementById("userIDbutton").onclick = function(){
+
+let username1 = document.querySelector("b");
+let userResult1;
+let url = 'https://jsonplaceholder.typicode.com/users/' + document.getElementById("userID").value;
+fetch(url)
+    .then(res => res.json())
+    .then(data => userResult1 = data)
+    .then(() => username1.innerHTML = userResult1.name)
+}
+
+
+// Post
+document.getElementById("postIDbutton").onclick = function() {
+
+let post1 = document.getElementById("postPlek");
+let postResult1;
+let urlPost1 = 'https://jsonplaceholder.typicode.com/posts/' + document.getElementById("postID").value;
+fetch(urlPost1)
+    .then(res => res.json())
+    .then(data => postResult1 = data)
+    .then(() => post1.innerHTML = postResult1.body)
+}
+
+//comment
+document.getElementById("commentIDbutton").onclick = function() {
+
+let comment1  = document.getElementById("commentPlek");
+let commentResult1;
+let urlComment1 = 'https://jsonplaceholder.typicode.com/comments/' + document.getElementById("commentID").value;
+
+fetch(urlComment1)
+.then(res => res.json())
+.then(data => commentResult1 = data)
+.then(() => comment1.innerHTML = commentResult1.body)
+}
+</script>
+</body>
+</html>
