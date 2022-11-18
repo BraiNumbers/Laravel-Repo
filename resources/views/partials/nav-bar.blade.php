@@ -1,9 +1,9 @@
 <link rel="stylesheet" type="text/css" href="{{ url('style.css') }}" />
+<script src="https://kit.fontawesome.com/bc555db243.js" crossorigin="anonymous"></script>
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand">Bryan Kreeft</a>
-    
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
